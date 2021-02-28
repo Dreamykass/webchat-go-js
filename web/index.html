@@ -4,6 +4,27 @@
     <script src="https://fb.me/react-0.14.3.min.js"></script>
     <script src="https://fb.me/react-dom-0.14.3.min.js"></script>
     <title></title>
+    <script>
+
+        try {
+            setInterval(async () => {
+                const response = await fetch('http://localhost:8080/time')
+                    .then(response => response.json())
+                    .then(data => {
+                        const msg = "Current time: "
+                            + data['Hours'] + ":" + data['Minutes'] + ":" + data['Seconds'];
+
+                        ReactDOM.render(
+                            React.createElement('H1', null, msg),
+                            document.getElementById('root')
+                        )
+                        console.log(data)
+                    });
+            }, 1000);
+        } catch (e) {
+            console.log(e);
+        }
+    </script>
 </head>
 <body>
 <div id="root"></div>
